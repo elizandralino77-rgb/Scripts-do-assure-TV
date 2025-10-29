@@ -1,0 +1,81 @@
+-- Versão ofuscada (compatível com Roblox Studio) — Painel assure_TV (vermelho mais claro)
+local a,b,c=game:GetService("Players"),game:GetService("RunService"),game:GetService("UserInputService")
+local d,e=a.LocalPlayer,a.LocalPlayer:WaitForChild("PlayerGui")
+local F=Instance.new
+local G=F("ScreenGui",e);G.Name="PainelAssureTV";G.ResetOnSpawn=false
+local H=F("Frame");H.Size,H.Position=UDim2.new(0,280,0,240),UDim2.new(0.35,0,0.35,0)
+H.BackgroundColor3=Color3.fromRGB(200,50,50);H.BorderSizePixel=0;H.Active=true;H.Draggable=true;H.Parent=G
+local I=F("TextLabel",H);I.Size,I.Position=UDim2.new(1,-40,0,35),UDim2.new(0,10,0,0)
+I.Text,I.TextColor3="Painel do ".."assure_".."TV",Color3.fromRGB(240,240,240);I.BackgroundTransparency=1;I.TextScaled=true;I.Font=Enum.Font.GothamBold
+local J=F("TextButton",H);J.Size,J.Position=UDim2.new(0,30,0,30),UDim2.new(1,-35,0,5)
+J.Text,J.TextColor3="X",Color3.fromRGB(240,240,240);J.BackgroundColor3=Color3.fromRGB(130,30,30);J.Font=Enum.Font.GothamBold
+
+local K=F("ScrollingFrame",H);K.Size,K.Position=UDim2.new(1,-20,1,-55),UDim2.new(0,10,0,40)
+K.CanvasSize,K.ScrollBarThickness=UDim2.new(0,0,0,0),6;K.BackgroundColor3=Color3.fromRGB(30,30,30)
+local L=F("UIListLayout",K);L.Padding,L.SortOrder=UDim.new(0,8),Enum.SortOrder.LayoutOrder
+L:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() K.CanvasSize=UDim2.new(0,0,0,L.AbsoluteContentSize.Y+10) end)
+
+local function M(N)local O=F("TextBox") O.Size,O.BackgroundColor3=UDim2.new(0,200,0,30),Color3.fromRGB(100,40,40)
+ O.TextColor3,O.PlaceholderText,O.ClearTextOnFocus,O.Font=Color3.fromRGB(240,240,240),N,false,Enum.Font.Gotham
+ O.Parent=K;return O end
+local function P(Q)local R=F("TextButton") R.Size,R.BackgroundColor3,R.TextColor3,R.Font,R.Text=UDim2.new(0,200,0,30),Color3.fromRGB(160,60,60),Color3.fromRGB(240,240,240),Enum.Font.GothamBold,Q
+ R.BorderSizePixel=1;R.BorderColor3=Color3.fromRGB(80,80,80);R.Parent=K;return R end
+
+local S=false;T=false;U=false;V=false;W=false
+local X=d.Character and d.Character:FindFirstChildOfClass("Humanoid")
+local Y,Z,AA
+
+local function AB(AC) if d.Character then for _,AD in pairs(d.Character:GetDescendants()) do if AD:IsA("BasePart") then AD.CanCollide=AC end end end end
+local function AE(AF) X=AF:WaitForChild("Humanoid") if S and Y then X.WalkSpeed=Y end if T and Z then X.UseJumpPower=true;X.JumpPower=Z end if AA then workspace.Gravity=AA end if V then AB(false) else AB(true) end end
+d.CharacterAdded:Connect(AE) if d.Character then AE(d.Character) end
+
+local VelBox,SpeedBtn=M("Velocidade do ".."Speed..."),P("Ativar ".."Speed")
+SpeedBtn.MouseButton1Click:Connect(function()
+ if not X then return end
+ local h1=tonumber(VelBox.Text) if not h1 then return end
+ if S then X.WalkSpeed=16;S=false;SpeedBtn.Text="Ativar ".."Speed";Y=nil else X.WalkSpeed=h1;S=true;SpeedBtn.Text="Desativar ".."Speed";Y=h1 end
+end)
+
+local JumpBox,JumpBtn=M("Altura do ".."Pulo..."),P("Ativar ".."Jump")
+JumpBtn.MouseButton1Click:Connect(function()
+ if not X then return end
+ local h2=tonumber(JumpBox.Text) if not h2 then return end
+ if T then X.JumpPower=50;T=false;JumpBtn.Text="Ativar ".."Jump";Z=nil else X.UseJumpPower=true;X.JumpPower=h2;T=true;JumpBtn.Text="Desativar ".."Jump";Z=h2 end
+end)
+
+local InfBox,InfBtn=M("Força do pulo ".."infinito..."),P("Ativar ".."Infinite Jump")
+InfBtn.MouseButton1Click:Connect(function() U=not U;InfBtn.Text=U and "Desativar ".."Infinite Jump" or "Ativar ".."Infinite Jump" end)
+c.JumpRequest:Connect(function() if U and X then X.UseJumpPower=true;X.JumpPower=tonumber(InfBox.Text) or 50;X:ChangeState(Enum.HumanoidStateType.Jumping) end end)
+
+local NoClipBtn=P("Ativar ".."NoClip")
+NoClipBtn.MouseButton1Click:Connect(function() V=not V;NoClipBtn.Text=V and "Desativar ".."NoClip" or "Ativar ".."NoClip"; AB(not V and true or false) end)
+b.Stepped:Connect(function() if V then AB(false) end end)
+
+local TeleportBtn=P("Teleportar ".."Jogador")
+local TeleList=F("Frame",K);TeleList.Size,TeleList.BackgroundColor3,TeleList.Visible=UDim2.new(1,0,0,200),Color3.fromRGB(30,30,30),false
+local TL_Layout=F("UIListLayout",TeleList)
+TeleportBtn.MouseButton1Click:Connect(function()
+ TeleList.Visible=not TeleList.Visible
+ for _,c1 in pairs(TeleList:GetChildren()) do if c1:IsA("TextButton") then c1:Destroy() end end
+ for _,plr in pairs(a:GetPlayers()) do
+  if plr~=d then
+   local bt=P(plr.Name);bt.Parent=TeleList
+   bt.MouseButton1Click:Connect(function() if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and d.Character and d.Character:FindFirstChild("HumanoidRootPart") then d.Character.HumanoidRootPart.CFrame=plr.Character.HumanoidRootPart.CFrame+Vector3.new(0,5,0) end end)
+  end
+ end
+end)
+
+local GravBox,GravBtn=M("Gravidade..."),P("Ativar ".."Gravidade")
+GravBtn.MouseButton1Click:Connect(function()
+ local g1=tonumber(GravBox.Text) if not g1 then return end
+ if AA then workspace.Gravity=196.2;AA=nil;GravBtn.Text="Ativar ".."Gravidade" else workspace.Gravity=g1;AA=g1;GravBtn.Text="Desativar ".."Gravidade" end
+end)
+
+local HitBtn,FlyBtn,IYBtn=P("Hitboxes ".."Dano"),P("Fly"),P("Infinite ".."Yield")
+HitBtn.MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://".."pastefy.app/ItfO0tdg/raw"))() end)
+FlyBtn.MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://".."rawscripts.net/raw/Universal-Script-Gui-Fly-v3-37111"))() end)
+IYBtn.MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://".."rawscripts.net/raw/Universal-Script-Infinite-Yield-43437"))() end)
+
+J.MouseButton1Click:Connect(function()
+ if W then H:TweenSize(UDim2.new(0,280,0,240),"Out","Quad",0.25,true);K.Visible=true;W=false else H:TweenSize(UDim2.new(0,220,0,60),"Out","Quad",0.25,true);K.Visible=false;W=true end
+end)
