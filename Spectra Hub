@@ -1,394 +1,263 @@
--- LocalScript: Spectra HUB 🕷️ / V1(feito por assure_TV)
+-- Obfuscado: Spectra HUB (ofuscação leve, pronto pra colar)
+local function _s(t)local r={}for i=1,#t do r[i]=string.char(t[i])end;return table.concat(r)end
 
-local player = game.Players.LocalPlayer
-local gui = Instance.new("ScreenGui")
-gui.Name = "SpectraHubUI"
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+local p = game.Players.LocalPlayer
+local g = Instance.new("ScreenGui")
+g.Name = _s{83,112,101,99,116,114,97,72,117,98,85,73} -- "SpectraHubUI"
+g.ResetOnSpawn = false
+g.Parent = p:WaitForChild("PlayerGui")
 
---// Painel principal
-local panel = Instance.new("Frame")
-panel.Size = UDim2.new(0, 400, 0, 250)
-panel.Position = UDim2.new(0.3, 0, 0.3, 0)
-panel.BackgroundColor3 = Color3.fromRGB(70, 0, 100)
-panel.BorderSizePixel = 0
-panel.Active = true
-panel.Draggable = true
-panel.Parent = gui
+local a = Instance.new("Frame")
+a.Size = UDim2.new(0,400,0,250)
+a.Position = UDim2.new(0.3,0,0.3,0)
+a.BackgroundColor3 = Color3.fromRGB(70,0,100)
+a.BorderSizePixel = 0
+a.Active = true
+a.Draggable = true
+a.Parent = g
 
--- Gradiente roxo
-local gradient = Instance.new("UIGradient")
-gradient.Color = ColorSequence.new({
-ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 255)),
-ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 0, 120))
-})
-gradient.Rotation = 90
-gradient.Parent = panel
+local b = Instance.new("UIGradient")
+b.Color = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(150,0,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(80,0,120))})
+b.Rotation = 90
+b.Parent = a
 
---// Fundo com raios roxos
-local lightningBg = Instance.new("ImageLabel")
-lightningBg.Size = UDim2.new(1, 0, 1, 0)
-lightningBg.Position = UDim2.new(0, 0, 0, 0)
-lightningBg.BackgroundTransparency = 1
-lightningBg.Image = "rbxassetid://14216197206" -- use aqui o ID da textura de raio que quiser
-lightningBg.ImageColor3 = Color3.fromRGB(180, 0, 255)
-lightningBg.ImageTransparency = 0.15
-lightningBg.ZIndex = 0
-lightningBg.ScaleType = Enum.ScaleType.Crop
-lightningBg.Parent = panel
+local c = Instance.new("ImageLabel")
+c.Size = UDim2.new(1,0,1,0)
+c.Position = UDim2.new(0,0,0,0)
+c.BackgroundTransparency = 1
+c.Image = "rbxassetid://14216197206"
+c.ImageColor3 = Color3.fromRGB(180,0,255)
+c.ImageTransparency = 0.15
+c.ZIndex = 0
+c.ScaleType = Enum.ScaleType.Crop
+c.Parent = a
 
---// Barra superior
-local topBar = Instance.new("Frame")
-topBar.Size = UDim2.new(1, 0, 0, 30)
-topBar.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
-topBar.BorderSizePixel = 0
-topBar.ZIndex = 2
-topBar.Parent = panel
+local d = Instance.new("Frame")
+d.Size = UDim2.new(1,0,0,30)
+d.BackgroundColor3 = Color3.fromRGB(120,0,180)
+d.BorderSizePixel = 0
+d.ZIndex = 2
+d.Parent = a
 
---// Título
-local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, -60, 1, 0)
-title.Position = UDim2.new(0, 10, 0, 0)
-title.BackgroundTransparency = 1
-title.Text = "Spectra HUB 🕷️ / V1 [Brookhaven RP]"
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.TextXAlignment = Enum.TextXAlignment.Left
-title.Font = Enum.Font.GothamBold
-title.TextSize = 18
-title.ZIndex = 3
-title.Parent = topBar
+local e = Instance.new("TextLabel")
+e.Size = UDim2.new(1,-60,1,0)
+e.Position = UDim2.new(0,10,0,0)
+e.BackgroundTransparency = 1
+e.Text = _s{83,112,101,99,116,114,97,32,72,85,66,32,240,159,146,177,32,47,32,86,49,32,91,66,114,111,111,107,104,97,118,101,110,32,82,80,93}
+e.TextColor3 = Color3.fromRGB(255,255,255)
+e.TextXAlignment = Enum.TextXAlignment.Left
+e.Font = Enum.Font.GothamBold
+e.TextSize = 18
+e.ZIndex = 3
+e.Parent = d
 
---// Botão minimizar
-local minimize = Instance.new("TextButton")
-minimize.Size = UDim2.new(0, 25, 0, 25)
-minimize.Position = UDim2.new(1, -55, 0, 3)
-minimize.BackgroundColor3 = Color3.fromRGB(100, 0, 150)
-minimize.Text = "-"
-minimize.TextColor3 = Color3.new(1, 1, 1)
-minimize.Font = Enum.Font.GothamBold
-minimize.TextSize = 18
-minimize.ZIndex = 3
-minimize.Parent = topBar
+local f = Instance.new("TextButton")
+f.Size = UDim2.new(0,25,0,25)
+f.Position = UDim2.new(1,-55,0,3)
+f.BackgroundColor3 = Color3.fromRGB(100,0,150)
+f.Text = "-"
+f.TextColor3 = Color3.new(1,1,1)
+f.Font = Enum.Font.GothamBold
+f.TextSize = 18
+f.ZIndex = 3
+f.Parent = d
 
---// Botão fechar
-local close = Instance.new("TextButton")
-close.Size = UDim2.new(0, 25, 0, 25)
-close.Position = UDim2.new(1, -28, 0, 3)
-close.BackgroundColor3 = Color3.fromRGB(160, 0, 200)
-close.Text = "X"
-close.TextColor3 = Color3.new(1, 1, 1)
-close.Font = Enum.Font.GothamBold
-close.TextSize = 18
-close.ZIndex = 3
-close.Parent = topBar
+local h = Instance.new("TextButton")
+h.Size = UDim2.new(0,25,0,25)
+h.Position = UDim2.new(1,-28,0,3)
+h.BackgroundColor3 = Color3.fromRGB(160,0,200)
+h.Text = "X"
+h.TextColor3 = Color3.new(1,1,1)
+h.Font = Enum.Font.GothamBold
+h.TextSize = 18
+h.ZIndex = 3
+h.Parent = d
 
---// Conteúdo
-local content = Instance.new("Frame")
-content.Size = UDim2.new(1, 0, 1, -30)
-content.Position = UDim2.new(0, 0, 0, 30)
-content.BackgroundTransparency = 1
-content.ZIndex = 2
-content.Parent = panel
+local i = Instance.new("Frame")
+i.Size = UDim2.new(1,0,1,-30)
+i.Position = UDim2.new(0,0,0,30)
+i.BackgroundTransparency = 1
+i.ZIndex = 2
+i.Parent = a
 
---// ScrollFrame
-local scroll = Instance.new("ScrollingFrame")
-scroll.Size = UDim2.new(1, -10, 1, -10)
-scroll.Position = UDim2.new(0, 5, 0, 5)
-scroll.BackgroundTransparency = 1
-scroll.ScrollBarThickness = 6
-scroll.CanvasSize = UDim2.new(0, 0, 0, 2000)
-scroll.ZIndex = 3
-scroll.Parent = content
+local j = Instance.new("ScrollingFrame")
+j.Size = UDim2.new(1,-10,1,-10)
+j.Position = UDim2.new(0,5,0,5)
+j.BackgroundTransparency = 1
+j.ScrollBarThickness = 6
+j.CanvasSize = UDim2.new(0,0,0,2000)
+j.ZIndex = 3
+j.Parent = i
 
---// Função para criar botões
-local function createButton(name, yPosition, callback)
-local btn = Instance.new("TextButton")
-btn.Size = UDim2.new(0, 200, 0, 40)
-btn.Position = UDim2.new(0.5, -100, 0, yPosition)
-btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
-btn.Text = name
-btn.TextColor3 = Color3.new(1, 1, 1)
-btn.Font = Enum.Font.GothamBold
-btn.TextSize = 18
-btn.AutoButtonColor = false
-btn.ZIndex = 4
-btn.Parent = scroll
+local function k(n,y,cb)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0,200,0,40)
+	btn.Position = UDim2.new(0.5,-100,0,y)
+	btn.BackgroundColor3 = Color3.fromRGB(120,0,180)
+	btn.Text = n
+	btn.TextColor3 = Color3.new(1,1,1)
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 18
+	btn.AutoButtonColor = false
+	btn.ZIndex = 4
+	btn.Parent = j
 
-local uiCorner = Instance.new("UICorner")
-uiCorner.CornerRadius = UDim.new(0, 6)
-uiCorner.Parent = btn
+	local uiCorner = Instance.new("UICorner")
+	uiCorner.CornerRadius = UDim.new(0,6)
+	uiCorner.Parent = btn
 
-btn.MouseEnter:Connect(function()
-btn.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
-end)
-btn.MouseLeave:Connect(function()
-btn.BackgroundColor3 = Color3.fromRGB(120, 0, 180)
-end)
-
-btn.MouseButton1Click:Connect(callback)
-
+	btn.MouseEnter:Connect(function() btn.BackgroundColor3 = Color3.fromRGB(170,0,255) end)
+	btn.MouseLeave:Connect(function() btn.BackgroundColor3 = Color3.fromRGB(120,0,180) end)
+	btn.MouseButton1Click:Connect(cb)
 end
 
---// Funções utilitárias
-local function runWear(ids)
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Wear = ReplicatedStorage.Remotes.Wear
-for _, id in ipairs(ids) do
-pcall(function()
-Wear:InvokeServer(id)
-end)
-end
+local function l(ids)
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
+	for _,v in ipairs(ids) do
+		pcall(function() W:InvokeServer(v) end)
+	end
 end
 
-local function changeColor(color)
-pcall(function()
-game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer(color)
-end)
+local function m(col)
+	pcall(function() game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer(col) end)
 end
 
---// Botões (mesmos anteriores)
-createButton("Black", 10, function()
-runWear({
-124839612210239,124839612210239,10714003426,110782737608262,84312830787954,77391442486169,
-137761480448347,115704046599434,107943728196655,11460084205,15847167864,15894532736,
-12877455902,10159600649,87118769263089,94718317918187,9179890366,108041588020934,
-88896322200677,12277667273,16001974487,83886246298546,14991648815,11227907558,
-6379320828,6683727066,855783877,12660203945
-})
-changeColor("Really black")
-end)
-
-createButton("Fantasma", 60, function()
-runWear({
-84312830787954,84312830787954,110782737608262,16586145940,127682290965656,17406634097,
-114704423142759,91638919315070,15843020927,74891470,18154400455,106356059591579,
-108041588020934,114153430587737,137440508664346,93520131138422,12877455902,87118769263089,
-94718317918187,1344571905
-})
-changeColor("Really black")
-end)
-
-createButton("666", 110, function()
-runWear({
-89739702589003,18262052743,4716946122,72464041244217,79825138414359,136373242716774,
-123618360141697,14289986202,118574218129658,4754787124,754637456,754637456,619529601,892265784
-})
-changeColor("Really black")
-end)
-
-createButton("Goner", 160, function()
-runWear({
-11274394350,11274394350,17822749561,17812417356,17812415139,17771175724,17822722698,
-17772174303,17770317484,892268340,892267099,892265784
-})
-end)
-
-createButton("Plaquê Doctor", 210, function()
-runWear({
-134917317332597,134917317332597,76104684961073,113280776217715,12134501285,88423188570127,
-94604639662776,134022922877138,100316015179747,11743311601,80195816516327,754637456,
-619529601,892265784,122779057420681
-})
-end)
-
-createButton("Cabeça Invisível", 260, function()
-runWear({134082579})
-end)
-
-createButton("Sem Perna 1", 310, function()
-runWear({115656762149031})
-end)
-
-createButton("Sem Perna 2", 360, function()
-runWear({93177286821086})
-end)
-
-createButton("CLT", 410, function()
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Wear = ReplicatedStorage.Remotes.Wear
-
-pcall(function()
-Wear:InvokeServer(88622615712736)
-Wear:InvokeServer(18470797352)
-Wear:InvokeServer(72770909743501)
-game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Navy blue")
-end)
-
-end)
-
-createButton("Naruto", 460, function()
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Wear = ReplicatedStorage.Remotes.Wear
-
-pcall(function()
-Wear:InvokeServer(106107303222789)
-Wear:InvokeServer(3237352372)
-Wear:InvokeServer(6469644436)
-game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Light orange")
-end)
-
-end)
-
-createButton("Gocu", 510, function()
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Wear = ReplicatedStorage.Remotes.Wear
-
-pcall(function()
-Wear:InvokeServer(119989987680473)
-Wear:InvokeServer(72180776584471)
-game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Light orange")
-end)
-
-end)
-
-createButton("1x1x1", 560, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
+k("Black",10,function() l({124839612210239,124839612210239,10714003426,110782737608262,84312830787954,77391442486169,137761480448347,115704046599434,107943728196655,11460084205,15847167864,15894532736,12877455902,10159600649,87118769263089,94718317918187,9179890366,108041588020934,88896322200677,12277667273,16001974487,83886246298546,14991648815,11227907558,6379320828,6683727066,855783877,12660203945}) m("Really black") end)
+k("Fantasma",60,function() l({84312830787954,84312830787954,110782737608262,16586145940,127682290965656,17406634097,114704423142759,91638919315070,15843020927,74891470,18154400455,106356059591579,108041588020934,114153430587737,137440508664346,93520131138422,12877455902,87118769263089,94718317918187,1344571905}) m("Really black") end)
+k("666",110,function() l({89739702589003,18262052743,4716946122,72464041244217,79825138414359,136373242716774,123618360141697,14289986202,118574218129658,4754787124,754637456,754637456,619529601,892265784}) m("Really black") end)
+k("Goner",160,function() l({11274394350,11274394350,17822749561,17812417356,17812415139,17771175724,17822722698,17772174303,17770317484,892268340,892267099,892265784}) end)
+k("Plaquê Doctor",210,function() l({134917317332597,134917317332597,76104684961073,113280776217715,12134501285,88423188570127,94604639662776,134022922877138,100316015179747,11743311601,80195816516327,754637456,619529601,892265784,122779057420681}) end)
+k("Cabeça Invisível",260,function() l({134082579}) end)
+k("Sem Perna 1",310,function() l({115656762149031}) end)
+k("Sem Perna 2",360,function() l({93177286821086}) end)
+k("CLT",410,function()
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
 	pcall(function()
-		Wear:InvokeServer(13523212687)
-		Wear:InvokeServer(123402748268535)
-		Wear:InvokeServer(131754156599227)
-		Wear:InvokeServer(116197047142039)
-		Wear:InvokeServer(18853865420)
-		Wear:InvokeServer(109761633301819)
+		W:InvokeServer(88622615712736)
+		W:InvokeServer(18470797352)
+		W:InvokeServer(72770909743501)
+		game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Navy blue")
+	end)
+end)
+k("Naruto",460,function()
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
+	pcall(function()
+		W:InvokeServer(106107303222789)
+		W:InvokeServer(3237352372)
+		W:InvokeServer(6469644436)
+		game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Light orange")
+	end)
+end)
+k("Gocu",510,function()
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
+	pcall(function()
+		W:InvokeServer(119989987680473)
+		W:InvokeServer(72180776584471)
+		game:GetService("ReplicatedStorage").Remotes.ChangeBodyColor:FireServer("Light orange")
+	end)
+end)
+k("1x1x1",560,function()
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
+	pcall(function()
+		W:InvokeServer(13523212687)
+		W:InvokeServer(123402748268535)
+		W:InvokeServer(131754156599227)
+		W:InvokeServer(116197047142039)
+		W:InvokeServer(18853865420)
+		W:InvokeServer(109761633301819)
+	end)
+end)
+k("Fada 1",610,function() l({226189871}) end)
+k("Fada 2",660,function() l({150381051}) end)
+k("Fada 3",710,function() l({141742418}) end)
+k("Fada 4",760,function() l({128217885}) end)
+k("Asa de Anjo",810,function() l({192557913}) end)
+k("Abóbora",860,function() l({132809431}) end)
+k("Chapéu",910,function() l({305888394}) end)
+k("Sasuke",560,function()
+	local rs = game:GetService("ReplicatedStorage")
+	local W = rs.Remotes.Wear
+	pcall(function()
+		W:InvokeServer(17084577233)
+		W:InvokeServer(114248475006211)
+		W:InvokeServer(94502992658752)
+		W:InvokeServer(14221681868)
+		W:InvokeServer(13442995528)
+		W:InvokeServer(92447738117948)
+		W:InvokeServer(112022464137788)
+		W:InvokeServer(73035562466867)
+		W:InvokeServer(658832408)
+		W:InvokeServer(658831143)
+		W:InvokeServer(658830056)
+		W:InvokeServer(135542686675252)
+		local s = Instance.new("Sound")
+		s.SoundId = "rbxassetid://1592708450"
+		s.Volume = 2
+		s.PlayOnRemove = false
+		s.Parent = workspace
+		s:Play()
 	end)
 end)
 
-createButton("Fada 1", 610, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
+h.MouseButton1Click:Connect(function() g:Destroy() end)
 
-	pcall(function()
-		Wear:InvokeServer(226189871)
-	end)
-end)
-
-createButton("Fada 2", 660, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(150381051)
-	end)
-end)
-
-createButton("Fada 3", 710, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(141742418)
-	end)
-end)
-
-createButton("Fada 4", 760, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(128217885)
-	end)
-end)
-
-createButton("Asa de Anjo", 810, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(192557913)
-	end)
-end)
-
-createButton("Abóbora", 860, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(132809431)
-	end)
-end)
-
-createButton("Chapéu", 910, function()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local Wear = ReplicatedStorage.Remotes.Wear
-
-	pcall(function()
-		Wear:InvokeServer(305888394)
-	end)
-end)
---// Fechar e minimizar
-close.MouseButton1Click:Connect(function()
-gui:Destroy()
-end)
-
-local minimized = false
-minimize.MouseButton1Click:Connect(function()
-if not minimized then
-content.Visible = false
-panel.Size = UDim2.new(0, 400, 0, 30)
-minimized = true
-else
-content.Visible = true
-panel.Size = UDim2.new(0, 400, 0, 250)
-minimized = false
-end
+local _min=false
+f.MouseButton1Click:Connect(function()
+	if not _min then
+		i.Visible = false
+		a.Size = UDim2.new(0,400,0,30)
+		_min=true
+	else
+		i.Visible = true
+		a.Size = UDim2.new(0,400,0,250)
+		_min=false
+	end
 end)
 
 task.spawn(function()
 	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	local PlayerGui = player:WaitForChild("PlayerGui")
-
-	-- Cria a interface principal
-	local screenGui = Instance.new("ScreenGui")
-	screenGui.Name = "CreditMessage"
-	screenGui.ResetOnSpawn = false
-	screenGui.Parent = PlayerGui
-
-	-- Cria o som
-	local sound = Instance.new("Sound")
-	sound.SoundId = "rbxassetid://94433663716765"
-	sound.Volume = 5
-	sound.Parent = screenGui
-	sound:Play()
-
-	-- Cria o texto
-	local textLabel = Instance.new("TextLabel")
-	textLabel.Parent = screenGui
-	textLabel.Size = UDim2.new(0, 550, 0, 60)
-	textLabel.Position = UDim2.new(1, -570, 1, -70) -- canto inferior direito
-	textLabel.BackgroundTransparency = 1
-	textLabel.Text = "Esse script foi feito por assure_TV — muito obrigado por usar o Spectra HUB 🕷️ / V1!!"
-	textLabel.TextScaled = true
-	textLabel.Font = Enum.Font.GothamBold
-	textLabel.TextStrokeTransparency = 0.3
-	textLabel.TextTransparency = 0
-
-	-- Efeito RGB + brilho pulsante
+	local pl = Players.LocalPlayer
+	local Pg = pl:WaitForChild("PlayerGui")
+	local sg = Instance.new("ScreenGui")
+	sg.Name = "CreditMessage"
+	sg.ResetOnSpawn = false
+	sg.Parent = Pg
+	local snd = Instance.new("Sound")
+	snd.SoundId = "rbxassetid://94433663716765"
+	snd.Volume = 5
+	snd.Parent = sg
+	snd:Play()
+	local lbl = Instance.new("TextLabel")
+	lbl.Parent = sg
+	lbl.Size = UDim2.new(0,550,0,60)
+	lbl.Position = UDim2.new(1,-570,1,-70)
+	lbl.BackgroundTransparency = 1
+	lbl.Text = _s{97,115,115,117,114,101,95,84,86,32,45,32,109,117,105,116,111,32,111,98,114,105,103,97,100,111,32,112,111,114,32,117,115,97,114,32,111,32,83,112,101,99,116,114,97,32,72,85,66,32,240,159,146,177,32,47,32,86,49,33,33} -- "assure_TV - muito obrigado por usar o Spectra HUB 🕷️ / V1!!"
+	lbl.TextScaled = true
+	lbl.Font = Enum.Font.GothamBold
+	lbl.TextStrokeTransparency = 0.3
+	lbl.TextTransparency = 0
 	local RunService = game:GetService("RunService")
-	local startTime = tick()
-
-	local connection = RunService.RenderStepped:Connect(function()
-		local t = tick() - startTime
+	local t0 = tick()
+	local conn
+	conn = RunService.RenderStepped:Connect(function()
+		local t = tick() - t0
 		local r = math.sin(t * 5) * 127 + 128
-		local g = math.sin(t * 5 + 2) * 127 + 128
-		local b = math.sin(t * 5 + 4) * 127 + 128
-		textLabel.TextColor3 = Color3.fromRGB(r, g, b)
-		textLabel.TextStrokeTransparency = 0.2 + math.sin(t * 3) * 0.1
+		local g2 = math.sin(t * 5 + 2) * 127 + 128
+		local b2 = math.sin(t * 5 + 4) * 127 + 128
+		lbl.TextColor3 = Color3.fromRGB(r,g2,b2)
+		lbl.TextStrokeTransparency = 0.2 + math.sin(t * 3) * 0.1
 	end)
-
-	-- Mostra por 5 segundos
 	task.wait(5)
-
-	-- Para o efeito e remove a mensagem
-	connection:Disconnect()
-
-	-- Efeito de desaparecimento suave
+	conn:Disconnect()
 	local TweenService = game:GetService("TweenService")
-	local desaparecer = TweenService:Create(textLabel, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {TextTransparency = 1})
-	desaparecer:Play()
-	desaparecer.Completed:Wait()
-
-	screenGui:Destroy()
+	local twn = TweenService:Create(lbl, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {TextTransparency = 1})
+	twn:Play()
+	twn.Completed:Wait()
+	sg:Destroy()
 end)
